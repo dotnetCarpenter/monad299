@@ -24,6 +24,7 @@ main()
 
 
 /**
+ * bind must serve two purposes: it must (1) apply f' to the correct part of g' x and (2) concatenate the string returned by g' with the string returned by f'.
  * @param {{ (a: number): [number, string] }} f1
  * @returns {{ ([gx, gs]: [number, string]) }}
  */
@@ -65,3 +66,23 @@ function main3 () {
 }
 
 main3()
+
+// In summary: the functions, bind and unit, allow us to compose debuggable
+// functions in a straightforward way, and compose ordinary functions with
+// debuggable functions in a natural way.
+// ++++++++++++++++++
+// bind makes our debuggable functions compatible with each other.
+// unit help us to lift a function's return value so we can bind it with another debuggable function.
+function main4 () {
+  console.log(
+    // Show that lift f * lift g = lift (f.g)
+    compose(bind(lift2(f)), lift2(g))(x),
+    lift2(compose(f,g))(x)
+  )
+
+  console.log(
+    compose(bind(g1), lift2(f))(x)
+  )
+}
+
+main4()
