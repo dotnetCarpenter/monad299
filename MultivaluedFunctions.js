@@ -35,7 +35,8 @@ function main2 () {
     sqrt(64),
   )
   console.log(
-    cbrt1([8, -8]),
+    // @ts-ignore
+    cbrt1([8, -8]), // NaN
     bind(cbrt1)([8, -8]),
   )
 
