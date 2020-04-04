@@ -9,16 +9,16 @@ import curry from './lib/curry.js'
 
 
 const compose2 = (unit, bind, ...fs) => initialValue => fs.reduceRight(
-    (value, f)=> bind(f)(value)
+    (value, f) => bind(f)(value)
   , unit(initialValue))
 
 /**
  * bind must serve two purposes: it must (1) apply f' to the correct part of g' x and (2) concatenate the string returned by g' with the string returned by f'.
- * @param {{ (a: number): [number, string] }} f1
+ * @param {{ (a: number): [number, string] }} f
  * @returns {{ ([gx, gs]: [number, string]) }}
  */
-let bind = f1 => ([gx,gs = '']) => {
-  let [fx,fs] = f1(gx)
+let bind = f => ([gx,gs = '']) => {
+  let [fx,fs] = f(gx)
   return [fx,gs+fs]
 }
 
