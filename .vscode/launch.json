@@ -9,7 +9,9 @@
       "request": "launch",
       "name": "Launch Program",
       "skipFiles": [
-        "<node_internals>/**"
+        "<node_internals>/**",
+        "compose.js",
+        "curry.js"
       ],
       "program": "${file}",
       "runtimeArgs": ["--experimental-modules"]

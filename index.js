@@ -1,6 +1,6 @@
 // @ts-check
 
-import compose from './compose.js'
+import compose from './lib/compose.js'
 
 /** @param {number} a */
 let f = a => a + 0.43

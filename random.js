@@ -1,5 +1,5 @@
 // @ts-ignore
-import curry from './curry.js'
+import curry from './lib/curry.js'
 import assert from 'assert'
 
 /** @param {number} a @param {{():number}} StdGen */

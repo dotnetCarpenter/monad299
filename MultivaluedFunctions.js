@@ -1,7 +1,7 @@
 // @ts-check
 
-import curry from './curry.js'
-import compose from './compose.js'
+import curry from './lib/curry.js'
+import compose from './lib/compose.js'
 
 const x = 64
 
