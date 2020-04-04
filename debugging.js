@@ -8,11 +8,9 @@ import compose from './lib/compose.js'
 import curry from './lib/curry.js'
 
 
-const compose2 = curry(
-  (bind, ...fs) => initialValue => fs.reduceRight(
+const compose2 = (unit, bind, ...fs) => initialValue => fs.reduceRight(
     (value, f)=> bind(f)(value)
   , unit(initialValue))
-)
 
 /**
  * bind must serve two purposes: it must (1) apply f' to the correct part of g' x and (2) concatenate the string returned by g' with the string returned by f'.
@@ -40,18 +38,21 @@ let g = a => a + 0.57
 let fDebug = a => [f(a), 'f is called.']
 
 function main () {
-
+  // TODO: better description of `bind`
   // `bind` changes the input of a function to match a lifted function, and the output
-  // `lift` changes the output of a function
-  // `unit` changes a value to match the bind function input
+  // `lift` changes a function's return value to the input of bind
+  // `unit` changes a value to match the input of bind
   let composed1 = compose(f, g, f)
   let composed2 = compose(bind(fDebug), bind(lift(g)), fDebug)
-  let composed3 = compose2(bind, fDebug, lift(g), fDebug)
+  let composed3 = compose2(unit, bind, fDebug, lift(g), fDebug)
+  let comp = curry(compose2, 3)(unit, bind)
+  let composed4 = comp(fDebug, lift(g), fDebug)
 
   console.log(
     composed1(X),
     composed2(X),
     composed3(X),
+    composed4(X),
   )
 }
 main()
